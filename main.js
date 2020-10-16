@@ -55,7 +55,7 @@ const verticalWin = () => {
 const diagonalWin = () => {
   if ((board[0][0] == playerTurn)&&(board[1][1] == playerTurn)&&(board[2][2] == playerTurn)){
     return (true)
-  } if ((board[0][2] == playerTurn)&&(board[1][1] == playerTurn)&&(board[0][2] == playerTurn)){
+  } if ((board[0][2] == playerTurn)&&(board[1][1] == playerTurn)&&(board[2][0] == playerTurn)){
     return (true)
   } 
 }

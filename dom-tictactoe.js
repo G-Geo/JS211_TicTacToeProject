@@ -27,17 +27,13 @@ const handleClick = (element) => {
 }
 
 const addMarker = (id) => {
-  console.log(`We'll place a mark on square: ${id}`)
-  // @TODO, Mix & Match. 
-  // You will need the following pieces:
-  
-  // = currentMarker
-  // .getElementById(id)
-  // document
-  // .innerHTML 
-  
-  // Arrange the above pieces into one a single line of code
-  // to add an X or O to the board to the DOM so it can be scene on the screen.
+  // console.log(`We'll place a mark on square: ${id}`)
+    document.getElementById(id).innerHTML = currentMarker;
+    let markerIndex = id.split("-");
+    let x = markerIndex[0];
+    let y = markerIndex[1]
+    board[x][y] = currentMarker;
+
 }
 
 // passes the element's id attribute from HTML to be used
@@ -47,7 +43,7 @@ const updateBoard = (id) => {
   const column = parseInt(id.charAt(2)) 
 
   console.log(`you clicked the sq at ${row} and ${column}`)
-  console.log(board)
+  // console.log(board)
 
   // @TODO, Your code here: use the above information to change the board variable(array of arrays)
   // HINT: in your browser open up the dev tools -> console
@@ -65,15 +61,31 @@ const checkForWin = () => {
 }
 
 const horizontalWin = () => {
-  // @TODO, Your code here: to check for horizontal wins
+  if ((board[0][0] == currentMarker)&&(board[0][1] == currentMarker)&&(board[0][2] == currentMarker)){
+    return (true)
+  } if ((board[1][0] == currentMarker)&&(board[1][1] == currentMarker)&&(board[1][2] == currentMarker)){
+    return (true)
+  } if ((board[2][0] == currentMarker)&&(board[2][1] == currentMarker)&&(board[2][2] == currentMarker)){
+    return (true)
+  } 
 }
-
 const verticalWin = () => {
-  // @TODO, Your code here: to check for vertical wins
+  //not tested
+  if ((board[0][0] == currentMarker)&&(board[1][0] == currentMarker)&&(board[2][0] == currentMarker)){
+    return (true)
+  } if ((board[0][1] == currentMarker)&&(board[1][1] == currentMarker)&&(board[2][1] == currentMarker)){
+    return (true)
+  } if ((board[0][2] == currentMarker)&&(board[1][2] == currentMarker)&&(board[2][2] == currentMarker)){
+    return (true)
+  } 
 }
 
 const diagonalWin = () => {
-  // @TODO, Your code here: to check for diagonal wins
+  if ((board[0][0] == currentMarker)&&(board[1][1] == currentMarker)&&(board[2][2] == currentMarker)){
+    return (true)
+  } if ((board[0][2] == currentMarker)&&(board[1][1] == currentMarker)&&(board[2][0] == currentMarker)){
+    return (true)
+  } 
 }
 
 const changeMarker = () => {
@@ -84,17 +96,19 @@ const changeMarker = () => {
 const resetBoard = () => {
   // sanity check: this tells us the function is being called
   console.log("the board was cleared!")
-
+  board = [
+      ['','',''],
+      ['','',''],
+      ['','','']
+    ];
   // collects all of the "td"s into an HTML Collection: https://www.w3schools.com/jsref/dom_obj_htmlcollection.asp  
   const squares = document.getElementsByTagName("TD")
   
   // loops over the HTML Collections and clears out the Xs and Os
   for (i=0; i<squares.length; i++) {
-    console.log(squares[i])
+    // console.log(squares[i])
     squares[i].innerHTML = null
   }
-  
-  // @TODO, Your code here: make sure to reset the array of arrays to empty for a new game
 }
 
 // **BONUSES**
